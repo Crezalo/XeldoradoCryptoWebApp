@@ -20,7 +20,7 @@ export function CreatorProfile({
   const Tabs = () => {
     return (
       <>
-        <Nav tabs style={{ width: '100%', justifyContent: 'center' }}>
+        <Nav tabs style={{ width: '100%', justifyContent: 'center', cursor: 'pointer' }}>
           <NavItem>
             <NavLink
               className={classnames({ active: activeTab === '1' })}
@@ -66,7 +66,7 @@ export function CreatorProfile({
 
       <div>
         <div className="image">
-          <img src={asvg} width="500" height="500"></img>
+          <img src={asvg} width="400" height="400" style={{ borderRadius: '400px' }}></img>
         </div>
 
         <div className="description">

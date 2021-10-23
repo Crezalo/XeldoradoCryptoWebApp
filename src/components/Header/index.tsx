@@ -25,6 +25,7 @@ import { Dots } from '../swap/styleds'
 import Web3Status from '../Web3Status'
 import NetworkSelector from './NetworkSelector'
 import UniBalanceContent from './UniBalanceContent'
+import logo from '../../assets/images/xeldorado.png'
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -269,12 +270,13 @@ export default function Header() {
         <UniBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />
       </Modal>
       <Title href=".">
-        <UniIcon>
-          <Logo fill={darkMode ? white : black} width="24px" height="100%" title="logo" />
-        </UniIcon>
+        {/* <UniIcon> */}
+        <img width="30" height="30" src={logo}></img>
+        {/* <Logo fill={darkMode ? white : black} width="24px" height="100%" title="logo" /> */}
+        {/* </UniIcon> */}
       </Title>
       <HeaderLinks>
-        <StyledNavLink to={'/creator/:creatorId'}>
+        <StyledNavLink to={'/swap'}>
           <Trans>Trade</Trans>
         </StyledNavLink>
         <StyledNavLink to={'/dashboard'}>

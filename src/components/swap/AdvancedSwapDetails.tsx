@@ -70,6 +70,19 @@ export function AdvancedSwapDetails({ trade, allowedSlippage, syncing = false }:
       <RowBetween>
         <RowFixed>
           <TYPE.subHeader color={theme.text1}>
+            <Trans>Creator Fee</Trans>
+          </TYPE.subHeader>
+        </RowFixed>
+        <TextWithLoadingPlaceholder syncing={syncing} width={65}>
+          <TYPE.black textAlign="right" fontSize={14}>
+            {realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${realizedLPFee.currency.symbol}` : '-'}
+          </TYPE.black>
+        </TextWithLoadingPlaceholder>
+      </RowBetween>
+
+      <RowBetween>
+        <RowFixed>
+          <TYPE.subHeader color={theme.text1}>
             <Trans>Price Impact</Trans>
           </TYPE.subHeader>
         </RowFixed>

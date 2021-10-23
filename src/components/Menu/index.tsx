@@ -121,11 +121,12 @@ const MenuItem = styled(ExternalLink)`
 const InternalMenuItem = styled(Link)`
   flex: 1;
   padding: 0.5rem 0.5rem;
+  text-decoration: auto;
   color: ${({ theme }) => theme.text2};
   :hover {
     color: ${({ theme }) => theme.text1};
     cursor: pointer;
-    text-decoration: none;
+    // text-decoration: none;
   }
   > svg {
     margin-right: 8px;
@@ -217,6 +218,7 @@ export default function Menu() {
   }, [open])
 
   const abc: string = '/creator/' + 'tanuj'
+
   return (
     // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30451
     <StyledMenu ref={node as any}>
@@ -233,18 +235,18 @@ export default function Menu() {
             default:
               return (
                 <MenuFlyout>
-                  <MenuItem href={abc}>
+                  <InternalMenuItem to={abc}>
                     <div>
                       <Trans>Profile</Trans>
                     </div>
                     {/* <Info opacity={0.6} size={16} /> */}
-                  </MenuItem>{' '}
-                  <MenuItem href="https://uniswap.org/">
+                  </InternalMenuItem>{' '}
+                  <InternalMenuItem to={abc}>
                     <div>
                       <Trans>Log out</Trans>
                     </div>
                     {/* <Info opacity={0.6} size={16} /> */}
-                  </MenuItem>
+                  </InternalMenuItem>
                   {/* <MenuItem href="https://uniswap.org/">
                     <div>
                       <Trans>About</Trans>
