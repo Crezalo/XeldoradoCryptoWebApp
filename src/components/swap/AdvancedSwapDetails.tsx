@@ -57,7 +57,7 @@ export function AdvancedSwapDetails({ trade, allowedSlippage, syncing = false }:
       <RowBetween>
         <RowFixed>
           <TYPE.subHeader color={theme.text1}>
-            <Trans>Liquidity Provider Fee</Trans>
+            <Trans>Excahnge Fee</Trans>
           </TYPE.subHeader>
         </RowFixed>
         <TextWithLoadingPlaceholder syncing={syncing} width={65}>

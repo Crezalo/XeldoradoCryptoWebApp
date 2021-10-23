@@ -445,7 +445,7 @@ export default function Swap({ history }: RouteComponentProps) {
             {!showWrap && trade && (
               <Row justify={!trade ? 'center' : 'space-between'}>
                 <RowFixed style={{ position: 'relative' }}>
-                  <MouseoverTooltipContent
+                  {/* <MouseoverTooltipContent
                     wrap={false}
                     content={
                       <ResponsiveTooltipContainer>
@@ -468,7 +468,7 @@ export default function Swap({ history }: RouteComponentProps) {
                         )}
                       </LoadingOpacityContainer>
                     </AutoRow>
-                  </MouseoverTooltipContent>
+                  </MouseoverTooltipContent> */}
                 </RowFixed>
                 <RowFixed>
                   <LoadingOpacityContainer $loading={routeIsSyncing}>

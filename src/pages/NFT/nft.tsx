@@ -89,7 +89,7 @@ export function Td({ to, children, nftURL }: tdprops) {
     textDecoration: 'auto',
     color: 'blue',
   }
-  
+
   const addr = '0xdc9232e2df177d7a12fdff6ecbab114e2231198d'
   const childrenCopy = children
   if (typeof children === 'string') {

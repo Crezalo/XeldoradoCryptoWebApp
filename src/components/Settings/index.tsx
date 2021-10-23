@@ -179,7 +179,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
           </AutoColumn>
         </ModalContentWrapper>
       </Modal>
-      <StyledMenuButton onClick={toggle} id="open-settings-dialog-button" aria-label={t`Transaction Settings`}>
+      {/* <StyledMenuButton onClick={toggle} id="open-settings-dialog-button" aria-label={t`Transaction Settings`}>
         <StyledMenuIcon />
         {expertMode ? (
           <EmojiWrapper>
@@ -253,7 +253,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
             </RowBetween>
           </AutoColumn>
         </MenuFlyout>
-      )}
+      )} */}
     </StyledMenu>
   )
 }

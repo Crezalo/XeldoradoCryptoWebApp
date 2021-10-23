@@ -275,7 +275,7 @@ export default function Header() {
       </Title>
       <HeaderLinks>
         <StyledNavLink to={'/creator/:creatorId'}>
-          <Trans>Swap</Trans>
+          <Trans>Trade</Trans>
         </StyledNavLink>
         <StyledNavLink to={'/dashboard'}>
           <Trans>Dashboard</Trans>
