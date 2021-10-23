@@ -1,0 +1,12 @@
+.details {
+  width: 30%;
+  float: left;
+  padding: 20px;
+  /* border: 2px solid red; */
+}
+.chart {
+  width: 70%;
+  float: left;
+  padding: 20px;
+  /* border: 2px solid red;  */
+}

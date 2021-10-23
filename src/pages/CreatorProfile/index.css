@@ -1,0 +1,19 @@
+.image {
+  width: 40%;
+  float: left;
+  padding: 20px;
+  /* border: 2px solid red; */
+}
+.description {
+  width: 30%;
+  float: right;
+  padding: 20px;
+  /* border: 2px solid red; */
+}
+
+.tokenDetails {
+  width: 30%;
+  float: right;
+  padding: 20px;
+  /* border: 2px solid red; */
+}
