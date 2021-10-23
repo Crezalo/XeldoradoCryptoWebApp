@@ -6,7 +6,7 @@ import { ApplicationModal, setOpenModal } from '../../state/application/actions'
 
 // Redirects to swap but only replace the pathname
 export function RedirectPathToTokenOnly({ location }: RouteComponentProps) {
-  return <Redirect to={{ ...location, pathname: '/token/:tokenId' }} />
+  return <Redirect to={{ ...location, pathname: '/pair/:tokenId' }} />
 }
 
 // Redirects from the /swap/:outputCurrency path to the /swap?outputCurrency=:outputCurrency format

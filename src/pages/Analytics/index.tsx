@@ -46,7 +46,7 @@ export const ProductTable = (props: { products: any; caption: string }) => {
 
   const rowHeader: any[] = Object.keys(items[0])
   const rowValue: any[] = Object.values(items)
-
+  const addr = '0xdc9232e2df177d7a12fdff6ecbab114e2231198d'
   return (
     <table>
       {/* <caption>{props.caption}</caption> */}
@@ -66,12 +66,9 @@ export const ProductTable = (props: { products: any; caption: string }) => {
         {rowValue.map((rowHeader: any) => (
           <tr key={rowHeader}>
             {Object.entries(rowHeader).map(([key, value]) => (
-              <Td key={key} to={'/token/' + value}>
+              <Td key={key} to={'/pair/' + addr}>
                 {value}
               </Td>
-              /* <Td to={'/token/' + item.name}>{item.name}</Td>
-            <Td to={'/token/' + item.name}>${item.price}</Td>
-            <Td to={'/token/' + item.name}>{item.stock}</Td> */
             ))}{' '}
           </tr>
         ))}
@@ -80,6 +77,7 @@ export const ProductTable = (props: { products: any; caption: string }) => {
     </table>
   )
 }
+
 type tdprops = {
   to: any
   children: any
@@ -87,10 +85,29 @@ type tdprops = {
 export function Td({ to, children }: tdprops) {
   // Conditionally wrapping content into a link
   // const ContentTag = to ? Link : 'div';
+  const defaultStyle = {
+    textDecoration: 'auto',
+    color: 'black',
+  }
 
+  if (typeof children === 'string') {
+    if (children.substring(0, 2) == '0x') {
+      children = children.substring(0, 4) + '...' + children.substring(children.length - 4, children.length)
+    }
+    if (children.substring(0, 1) == '+') {
+      defaultStyle.color = 'green'
+      children += '%'
+    }
+    if (children.substring(0, 1) == '-') {
+      defaultStyle.color = 'red'
+      children += '%'
+    }
+  }
   return (
     <td>
-      <Link to={to}>{children}</Link>
+      <Link style={defaultStyle} to={to}>
+        {children}
+      </Link>
     </td>
   )
 }
@@ -101,15 +118,95 @@ export default function Analytics() {
       <ProductTable
         caption={'Products'}
         products={[
-          { id: 1, name: 'Cheese', price: 4.9, stock: 20 },
-          { id: 2, name: 'Milk', price: 1.9, stock: 32 },
-          { id: 3, name: 'Yoghurt', price: 2.4, stock: 12 },
-          { id: 4, name: 'Heavy Cream', price: 3.9, stock: 9 },
-          { id: 5, name: 'Butter', price: 0.9, stock: 99 },
-          { id: 6, name: 'Sour Cream ', price: 2.9, stock: 86 },
-          { id: 7, name: 'Fancy French Cheese 🇫🇷', price: 99, stock: 12 },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
+          {
+            Pair: 'CT1/WETH',
+            'Volume 24H': 500000,
+            '24H%': '+4.9',
+            '7D%': '-20',
+            Owners: 5100,
+            'Total Supply': 1111888,
+          },
         ]}
       />
     </div>
   )
 }
+
+// { id: 2, name: 'Milk', price: 1.9, stock: 32 },
+// { id: 3, name: 'Yoghurt', price: 2.4, stock: 12 },
+// { id: 4, name: 'Heavy Cream', price: 3.9, stock: 9 },
+// { id: 5, name: 'Butter', price: 0.9, stock: 99 },
+// { id: 6, name: 'Sour Cream ', price: 2.9, stock: 86 },
+// { id: 7, name: 'Fancy French Cheese 🇫🇷', price: 99, stock: 12 },

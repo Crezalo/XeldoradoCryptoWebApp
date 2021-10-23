@@ -1,7 +1,7 @@
 import React from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import './index.css'
-import { ProductTable } from 'pages/Analytics'
+// import { ProductTable } from 'pages/Analytics'
 import ReactDOM from 'react-dom'
 import { format } from 'd3-format'
 import { timeFormat } from 'd3-time-format'
@@ -33,12 +33,140 @@ import {
 import { initialData } from './data'
 import './index.css'
 
+const useSortableData = (items: any, _config = null) => {
+  const [sortConfig, setSortConfig] = React.useState<any | null>(null)
+
+  const sortedItems = React.useMemo(() => {
+    const sortableItems = [...items]
+    if (sortConfig !== null) {
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1
+        }
+        return 0
+      })
+    }
+    return sortableItems
+  }, [items, sortConfig])
+
+  const requestSort = (key: any) => {
+    let direction = 'ascending'
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending'
+    }
+    setSortConfig({ key, direction })
+  }
+
+  return { items: sortedItems, requestSort, sortConfig }
+}
+
+export const ProductTable = (props: { products: any; caption: string; nftURL: string | undefined }) => {
+  const { items, requestSort, sortConfig } = useSortableData(props.products)
+  const getClassNamesFor = (name: string) => {
+    if (!sortConfig) {
+      return
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined
+  }
+
+  const rowHeader: any[] = Object.keys(items[0])
+  const rowValue: any[] = Object.values(items)
+
+  return (
+    <table>
+      {/* <caption>{props.caption}</caption> */}
+      <thead>
+        <tr>
+          {rowHeader.map((rowHeader: string) => (
+            <th key={rowHeader}>
+              <button type="button" onClick={() => requestSort(rowHeader)} className={getClassNamesFor(rowHeader)}>
+                {rowHeader}
+              </button>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {/* {items.map((item) => ( */}
+        {rowValue.map((rowHeader: any) => (
+          <tr key={rowHeader}>
+            {Object.entries(rowHeader).map(([key, value]) => (
+              <Td key={key} to={key} nftURL={props.nftURL}>
+                {value}
+              </Td>
+            ))}{' '}
+          </tr>
+        ))}
+        {/* ))} */}
+      </tbody>
+    </table>
+  )
+}
+type tdprops = {
+  to: any
+  children: any
+  nftURL: string | undefined
+}
+export function Td({ to, children, nftURL }: tdprops) {
+  // Conditionally wrapping content into a link
+  // const ContentTag = to ? Link : 'div';
+  const defaultStyle = {
+    textDecoration: 'auto',
+    color: 'blue',
+  }
+  const childrenCopy = children
+  if (typeof children === 'string') {
+    if (children.substring(0, 2) == '0x') {
+      children = children.substring(0, 4) + '...' + children.substring(children.length - 4, children.length)
+    }
+    if (children.substring(0, 1) == '+') {
+      defaultStyle.color = 'green'
+      children += '%'
+    }
+    if (children.substring(0, 1) == '-') {
+      defaultStyle.color = 'red'
+      children += '%'
+    }
+  }
+  const redirect = '/pair/0xdc9232e2df177d7a12fdff6ecbab114e2231198d'
+  // if (nftURL) {
+  //   redirect += nftURL
+  // }
+  let link = '/pair/' + children
+  if (to == 'Account') {
+    link = 'https://polygonscan.com/address/' + childrenCopy
+  }
+  if (to == 'TransactionId') {
+    link = 'https://polygonscan.com/tx/' + childrenCopy
+  }
+
+  if (to == 'Total Value' || to == 'In Token' || to == 'Out Token') {
+    return <td>{children}</td>
+  }
+
+  return (
+    <td onClick={() => handleOnClick(link, to)}>
+      <Link style={defaultStyle} to={redirect}>
+        {children}
+      </Link>
+    </td>
+  )
+}
+function handleOnClick(link: string, to: string) {
+  if (to != 'Total Value' && to != 'In Token' && to != 'Out Token') {
+    window.open(link)
+  }
+}
+
 export function Token({
   match: {
-    params: { tokenId: tokenIdFromUrl },
+    params: { tokenId: nftIdFromUrl },
   },
 }: RouteComponentProps<{ tokenId?: string }>) {
-  console.log(tokenIdFromUrl)
+  console.log(nftIdFromUrl)
 
   const App = () => {
     const ScaleProvider = discontinuousTimeScaleProviderBuilder().inputDateAccessor((d) => new Date(d.date))
@@ -194,7 +322,7 @@ export function Token({
 
   return (
     <div>
-      <button>{tokenIdFromUrl}</button>
+      <button>{nftIdFromUrl}</button>
 
       <div>
         <div className="details" style={{ width: '30%' }}>
@@ -214,10 +342,57 @@ export function Token({
       <ProductTable
         caption={'Pools'}
         products={[
-          { id: 5, name: 'Butter', price: 0.9, stock: 99 },
-          { id: 6, name: 'Sour Cream ', price: 2.9, stock: 86 },
-          { id: 7, name: 'Fancy French Cheese 🇫🇷', price: 99, stock: 12 },
+          {
+            'Total Value': '$500',
+            'In Token': '5 CT1',
+            'Out Token': '100 USDC',
+            Account: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
+          },
+          {
+            'Total Value': '$500',
+            'In Token': '5 CT1',
+            'Out Token': '100 USDC',
+            Account: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
+          },
+          {
+            'Total Value': '$500',
+            'In Token': '5 CT1',
+            'Out Token': '100 USDC',
+            Account: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
+          },
+          {
+            'Total Value': '$500',
+            'In Token': '5 CT1',
+            'Out Token': '100 USDC',
+            Account: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
+          },
+          {
+            'Total Value': '$500',
+            'In Token': '5 CT1',
+            'Out Token': '100 USDC',
+            Account: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
+          },
+          {
+            'Total Value': '$500',
+            'In Token': '5 CT1',
+            'Out Token': '100 USDC',
+            Account: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
+          },
+          {
+            'Total Value': '$500',
+            'In Token': '5 CT1',
+            'Out Token': '100 USDC',
+            Account: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
+          },
         ]}
+        nftURL={nftIdFromUrl}
       />
     </div>
   )

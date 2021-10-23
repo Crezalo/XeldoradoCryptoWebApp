@@ -1,6 +1,6 @@
 {
   "name": "@xeldorado/xeldorado-web-app",
-  "description": "Uniswap Interface",
+  "description": "Xeldorado Webapp",
   "homepage": ".",
   "main": "dist/interface.js",
   "module": "dist/interface.esm.js",

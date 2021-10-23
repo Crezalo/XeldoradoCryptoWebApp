@@ -96,7 +96,7 @@ export default function App() {
               <Route exact strict path="/dashboard" component={Dashboard} />
               <Route exact strict path="/icto" component={ICTO} />
               <Route exact strict path="/analytics" component={Analytics} />
-              <Route exact strict path="/token/:tokenId" component={Token} />
+              <Route exact strict path="/pair/:tokenId" component={Token} />
               <Route exact strict path="/nft/:nftId" component={NFT} />
               <Route exact strict path="/creator/:creatorId" component={CreatorProfile} />
 

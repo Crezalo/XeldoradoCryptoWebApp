@@ -4,7 +4,7 @@ import { Info } from 'react-feather'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import asvg from '../../assets/images/big_unicorn.png'
+import asvg from '../../assets/images/abc.png'
 
 const StyledInfo = styled(Info)`
   height: 16px;
@@ -28,19 +28,21 @@ export function CardLink({ to, children }: tdprops) {
 }
 const CardComponent = (name: string) => {
   return (
-    <CardLink to={'/nft/' + name}>
-      <CardImg top width="100%" src={asvg} alt="Card image cap" />
-      <CardBody>
-        <CardTitle tag="h5">{name}</CardTitle>
-        <CardSubtitle tag="h6" className="mb-2 text-muted">
-          Price
-        </CardSubtitle>
-        {/* <CardText>
+    <div className="card">
+      <CardLink to={'/nft/' + name}>
+        <CardImg top width="100%" src={asvg} alt="Card image cap" />
+        <CardBody>
+          <CardTitle tag="h5">{name}</CardTitle>
+          <CardSubtitle tag="h6" className="mb-2 text-muted">
+            Price
+          </CardSubtitle>
+          {/* <CardText>
           Some quick example text to build on the card title and make up the bulk of the cards content.
         </CardText> */}
-        {/* <Button>Button</Button> */}
-      </CardBody>
-    </CardLink>
+          {/* <Button>Button</Button> */}
+        </CardBody>
+      </CardLink>
+    </div>
   )
 }
 
@@ -50,7 +52,7 @@ export default function Dashboard() {
   return (
     // <div className="App">
     <Container>
-      <Row xs={4}>
+      <Row xs={3}>
         {[...Array(numberOfCards)].map((e, i) => {
           return (
             <Col key={e + i} className="col">
