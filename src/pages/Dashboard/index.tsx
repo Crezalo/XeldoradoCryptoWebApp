@@ -27,9 +27,10 @@ export function CardLink({ to, children }: tdprops) {
   )
 }
 const CardComponent = (name: string) => {
+  const tempLink = '/nft/0xA5F1Ea7DF861952863dF2e8d1312f7305dabf215/1111/0x9b814233894cd227f561b78cc65891aa55c62ad2'
   return (
     <div className="card">
-      <CardLink to={'/nft/' + name}>
+      <CardLink to={tempLink}>
         <CardImg top width="100%" src={asvg} alt="Card image cap" />
         <CardBody>
           <CardTitle tag="h5">{name}</CardTitle>

@@ -97,7 +97,7 @@ export default function App() {
               <Route exact strict path="/icto" component={ICTO} />
               <Route exact strict path="/analytics" component={Analytics} />
               <Route exact strict path="/pair/:tokenId" component={Token} />
-              <Route exact strict path="/nft/:nftId" component={NFT} />
+              <Route exact strict path="/nft/:nftContractAddr/:tokenId/:creatorAddr" component={NFT} />
               <Route exact strict path="/creator/:creatorId" component={CreatorProfile} />
 
               <Route exact strict path="/vote" component={Vote} />
@@ -108,7 +108,7 @@ export default function App() {
 
               <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
               <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
-              <Route exact strict path="/swap" component={Swap} />
+              <Route exact strict path="/trade" component={Swap} />
 
               <Route exact strict path="/pool/v2/find" component={PoolFinder} />
               <Route exact strict path="/pool/v2" component={PoolV2} />

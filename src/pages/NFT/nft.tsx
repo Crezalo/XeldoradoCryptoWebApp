@@ -35,7 +35,7 @@ const useSortableData = (items: any, _config = null) => {
   return { items: sortedItems, requestSort, sortConfig }
 }
 
-export const ProductTable = (props: { products: any; caption: string; nftURL: string | undefined }) => {
+export const ProductTable = (props: { products: any; caption: string; nftURL: any }) => {
   const { items, requestSort, sortConfig } = useSortableData(props.products)
   const getClassNamesFor = (name: string) => {
     if (!sortConfig) {
@@ -107,7 +107,7 @@ export function Td({ to, children, nftURL }: tdprops) {
   }
   let redirect = '/nft/'
   if (nftURL) {
-    redirect += nftURL
+    redirect += nftURL[0] + '/' + nftURL[1] + '/' + nftURL[2]
   }
   let link = '/pair/' + children
   if (to == 'Owner' || to == 'From') {
@@ -136,76 +136,92 @@ function handleOnClick(link: string, to: string) {
 
 export function NFT({
   match: {
-    params: { nftId: nftIdFromUrl },
+    params: { nftContractAddr: nftContractAddrUrl, tokenId: tokenIdUrl, creatorAddr: creatorAddrUrl },
   },
-}: RouteComponentProps<{ nftId?: string }>) {
-  console.log(nftIdFromUrl)
+}: RouteComponentProps<{ nftContractAddr?: string; tokenId?: string; creatorAddr?: string }>) {
+  // console.log()
+
+  const isOwner = false
+  const hasOwner = true
+  const ownerAddress = !isOwner ? '- 0x14dC79964da2C08b23698B3D3cc7Ca32193d9955' : 'You'
+  // api
 
   return (
     <div>
-      <button>{nftIdFromUrl}</button>
-
-      <div>
+      <button>{nftContractAddrUrl}</button>
+      <button>{tokenIdUrl}</button>
+      <button>{creatorAddrUrl}</button>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div className="details">
           {/* <div className="green"> */}
-          <div>Name</div>
-          <div>Creator</div>
-          <div>Price</div>
-          <div>Owner</div>
-          {/* </div>   */}
-          <ProductTable
-            nftURL={nftIdFromUrl}
-            caption={'Pools'}
-            products={[
-              {
-                Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                Price: '200 WETH',
-                From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
-              },
-              {
-                Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                Price: '200 WETH',
-                From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
-              },
-              {
-                Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                Price: '200 WETH',
-                From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
-              },
-              {
-                Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                Price: '200 WETH',
-                From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
-              },
-              {
-                Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                Price: '200 WETH',
-                From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
-              },
-              {
-                Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                Price: '200 WETH',
-                From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-                TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
-              },
-            ]}
-          />
-        </div>
+          <div>Collection Name</div>
+          <div>Name - Flying Horse</div>
+          <div>Token Id - #{tokenIdUrl}</div>
+          <div>
+            Description - Drop 2 of Semiosis is 10 animated pieces, created to reflect the movement all around us.
+            Signs, symbols and signals are everywhere around us in the built environment. They show us the way, warn us,
+            excite us. But on their own they have no meaning. We all learn a shared visual language, devoid of words, to
+            help us navigate the world. Semiosis is my first generative collection, featuring 25 unique symbols and 8
+            different colours.
+          </div>
+          <div>Created By - 0x14dC79964da2C08b23698B3D3cc7Ca32193d9955</div>
+          <div>Owned By {ownerAddress}</div>
 
+          {/* <div>Properties</div> */}
+          <div>Contract Address - {nftContractAddrUrl}</div>
+          <div>Token Standard - ERC-721</div>
+
+          <div>Blockchain - Polygon</div>
+          {isOwner && hasOwner && <button>Return NFT</button>}
+          {!(isOwner || hasOwner) && <button>Redeem NFT</button>}
+        </div>
         <div className="chart">
           {/* <div className="blue"> */}
-          <img src={asvg} width="500" height="500"></img>
-          <div>Description</div>
-          <div>Properties</div>
-          <div>Detail</div>
-          {/* </div> */}
+          <img src={asvg} width="300" height="300"></img>
         </div>
-      </div>
+      </div>{' '}
+      <ProductTable
+        nftURL={[nftContractAddrUrl, tokenIdUrl, creatorAddrUrl]}
+        caption={'Pools'}
+        products={[
+          {
+            Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            Price: '200 WETH',
+            From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
+          },
+          {
+            Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            Price: '200 WETH',
+            From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
+          },
+          {
+            Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            Price: '200 WETH',
+            From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
+          },
+          {
+            Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            Price: '200 WETH',
+            From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
+          },
+          {
+            Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            Price: '200 WETH',
+            From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
+          },
+          {
+            Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            Price: '200 WETH',
+            From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
+            TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
+          },
+        ]}
+      />
     </div>
   )
 }

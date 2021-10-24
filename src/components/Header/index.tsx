@@ -276,7 +276,7 @@ export default function Header() {
         {/* </UniIcon> */}
       </Title>
       <HeaderLinks>
-        <StyledNavLink to={'/swap'}>
+        <StyledNavLink to={'/trade'}>
           <Trans>Trade</Trans>
         </StyledNavLink>
         <StyledNavLink to={'/dashboard'}>

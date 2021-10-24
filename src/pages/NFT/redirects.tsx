@@ -6,7 +6,7 @@ import { ApplicationModal, setOpenModal } from '../../state/application/actions'
 
 // Redirects to swap but only replace the pathname
 export function RedirectPathToNFTOnly({ location }: RouteComponentProps) {
-  return <Redirect to={{ ...location, pathname: '/nft/:nftId' }} />
+  return <Redirect to={{ ...location, pathname: '/nft/:nftContractAddr/:tokenId/:creatorAddr' }} />
 }
 
 // Redirects from the /swap/:outputCurrency path to the /swap?outputCurrency=:outputCurrency format
