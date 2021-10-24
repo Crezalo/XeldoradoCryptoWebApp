@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 import { useDarkModeManager } from 'state/user/hooks'
 import styled, { css } from 'styled-components/macro'
 
-import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
+import { ReactComponent as MenuIcon } from '../../assets/images/profile.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { ApplicationModal } from '../../state/application/actions'
