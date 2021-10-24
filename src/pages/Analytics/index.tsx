@@ -47,6 +47,9 @@ export const ProductTable = (props: { products: any; caption: string }) => {
   const rowHeader: any[] = Object.keys(items[0])
   const rowValue: any[] = Object.values(items)
   const addr = '0xdc9232e2df177d7a12fdff6ecbab114e2231198d'
+  console.log(rowHeader)
+  console.log(rowValue)
+  Object.entries(rowValue[0]).map(([key, value]) => console.log('key: ' + key + ' value: ' + value))
   return (
     <table>
       {/* <caption>{props.caption}</caption> */}

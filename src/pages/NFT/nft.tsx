@@ -141,9 +141,10 @@ export function NFT({
 }: RouteComponentProps<{ nftContractAddr?: string; tokenId?: string; creatorAddr?: string }>) {
   // console.log()
 
-  const isOwner = false
+  const isOwner = true
   const hasOwner = true
-  const ownerAddress = !isOwner ? '- 0x14dC79964da2C08b23698B3D3cc7Ca32193d9955' : 'You'
+  const addr = '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955'
+  const ownerAddress = !isOwner ? addr : 'You'
   // api
 
   return (
@@ -157,6 +158,7 @@ export function NFT({
           <div>Collection Name</div>
           <div>Name - Flying Horse</div>
           <div>Token Id - #{tokenIdUrl}</div>
+          <div>Price - 200 CT1</div>
           <div>
             Description - Drop 2 of Semiosis is 10 animated pieces, created to reflect the movement all around us.
             Signs, symbols and signals are everywhere around us in the built environment. They show us the way, warn us,
@@ -165,7 +167,7 @@ export function NFT({
             different colours.
           </div>
           <div>Created By - 0x14dC79964da2C08b23698B3D3cc7Ca32193d9955</div>
-          <div>Owned By {ownerAddress}</div>
+          <div>Owned By - {ownerAddress}</div>
 
           {/* <div>Properties</div> */}
           <div>Contract Address - {nftContractAddrUrl}</div>
@@ -186,37 +188,37 @@ export function NFT({
         products={[
           {
             Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-            Price: '200 WETH',
+            Price: '200 CT1',
             From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
             TransactionId: '0xa5d36fd4391758c50997085a22cd8cb7122754bf27200d09943fced034f8e729',
           },
           {
             Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-            Price: '200 WETH',
+            Price: '200 CT1',
             From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
             TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
           },
           {
             Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-            Price: '200 WETH',
+            Price: '200 CT1',
             From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
             TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
           },
           {
             Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-            Price: '200 WETH',
+            Price: '200 CT1',
             From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
             TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
           },
           {
             Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-            Price: '200 WETH',
+            Price: '200 CT1',
             From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
             TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
           },
           {
             Owner: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
-            Price: '200 WETH',
+            Price: '200 CT1',
             From: '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955',
             TransactionId: '0xc60c695e08609b0e704fbdfe877930203750a4a5ba2b572d7d4383e962b81f69',
           },

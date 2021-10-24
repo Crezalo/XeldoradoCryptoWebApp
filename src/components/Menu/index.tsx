@@ -216,8 +216,8 @@ export default function Menu() {
   useEffect(() => {
     setMenu('main')
   }, [open])
-
-  const abc: string = '/creator/' + 'tanuj'
+  const creatorAddr = '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955'
+  const abc: string = '/creator/' + creatorAddr
 
   return (
     // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30451
