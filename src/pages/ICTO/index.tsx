@@ -268,8 +268,8 @@ export function Td(this: any, { to, children, rowValue }: tdprops) {
           <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Modal title</ModalHeader>
             <ModalBody>
-              <div>Min Bid Price - {rowValue.Creator}</div>
-              <div>Deadline - </div>
+              <div>Min Bid Price - {rowValue['Min Bid Price']}</div>
+              <div>Deadline - {rowValue['Time Remaining']}</div>
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={toggle}>

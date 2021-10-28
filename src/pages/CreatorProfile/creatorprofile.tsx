@@ -2,7 +2,23 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import './index.css'
 import asvg from '../../assets/images/big_unicorn.png'
 import { SetStateAction, useState } from 'react'
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap'
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Card,
+  Button,
+  CardTitle,
+  CardText,
+  Row,
+  Col,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from 'reactstrap'
 import classnames from 'classnames'
 import Dashboard from 'pages/Dashboard'
 import React from 'react'
@@ -243,18 +259,102 @@ export function CreatorProfile(
           {isWalletAddress && !isVaultGenerated && (
             <button onClick={() => handleGenerateVault()}>Generate Vault</button>
           )}
-          {isWalletAddress && isCreator && isVaultGenerated && <button>Create New NFT</button>}
-          {isWalletAddress && isCreator && isVaultGenerated && <button>Add Minted NFT</button>}
+          {isWalletAddress && isCreator && isVaultGenerated && <CreateNewwNFTModal />}
+          {isWalletAddress && isCreator && isVaultGenerated && <AddMintedNFTModal />}
           {isWalletAddress && isCreator && isVaultGenerated && !isICTOStarted && (
             <button>Initialize Liquidity Offering</button>
           )}
-          {isCreator && isVaultGenerated && isICTOStarted && !isICTOComplete && <button>View ICTO Subscription</button>}
+          {isCreator && isVaultGenerated && isICTOStarted && !isICTOComplete && <ICTOSubcriptionModal />}
         </div>
       </div>
       <div></div>
 
       <Tabs isCreator={isCreator} isVaultGenerated={isVaultGenerated} />
     </div>
+  )
+}
+
+const CreateNewwNFTModal = () => {
+  const [modal, setModal] = useState(false)
+
+  const toggle = () => setModal(!modal)
+  return (
+    <>
+      <button onClick={toggle}>Create New NFT</button>
+
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalBody>
+          <div>
+            <img src={asvg} />
+          </div>
+          <div>Name</div>
+          <div>Description</div>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={toggle}>
+            Bid
+          </Button>{' '}
+          {/* <Button color="secondary" onClick={toggle}>
+                Cancel
+              </Button> */}
+        </ModalFooter>
+      </Modal>
+    </>
+  )
+}
+
+const AddMintedNFTModal = () => {
+  const [modal, setModal] = useState(false)
+
+  const toggle = () => setModal(!modal)
+  return (
+    <>
+      <button onClick={toggle}>Add Minted NFT</button>
+
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalBody>
+          <div>NFT Contract</div>
+          <div>TokenId</div>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={toggle}>
+            Bid
+          </Button>{' '}
+          {/* <Button color="secondary" onClick={toggle}>
+                Cancel
+              </Button> */}
+        </ModalFooter>
+      </Modal>
+    </>
+  )
+}
+
+const ICTOSubcriptionModal = () => {
+  const [modal, setModal] = useState(false)
+
+  const toggle = () => setModal(!modal)
+  return (
+    <>
+      <button onClick={toggle}>View ICTO Subscription</button>
+
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalBody>
+          <div>Min Bid Price - 0.1 WETH</div>
+          <div>Deadline - 14 Days</div>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={toggle}>
+            Bid
+          </Button>{' '}
+          {/* <Button color="secondary" onClick={toggle}>
+                Cancel
+              </Button> */}
+        </ModalFooter>
+      </Modal>
+    </>
   )
 }
 
