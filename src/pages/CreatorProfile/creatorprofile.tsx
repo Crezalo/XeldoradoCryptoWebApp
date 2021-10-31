@@ -8,12 +8,7 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Card,
   Button,
-  CardTitle,
-  CardText,
-  Row,
-  Col,
   Modal,
   ModalBody,
   ModalFooter,
@@ -295,7 +290,7 @@ const CreateNewNFTModal = () => {
         <ModalBody>
           {/* <div> */}
           {/* <img src={asvg} /> */}
-          {/* <ImagePlaceholder /> */}
+          <ImagePlaceholder />
           {/* </div> */}
           <input type="tex" onChange={onChange} placeholder="Name" />
           {/* <div>Name</div> */}
@@ -304,7 +299,7 @@ const CreateNewNFTModal = () => {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
-            Bid
+            Create
           </Button>{' '}
           {/* <Button color="secondary" onClick={toggle}>
                 Cancel
@@ -333,7 +328,7 @@ const AddMintedNFTModal = () => {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
-            Bid
+            Add
           </Button>{' '}
           {/* <Button color="secondary" onClick={toggle}>
                 Cancel
@@ -378,60 +373,73 @@ function handleCreatorAddressClick(creatorIdFromUrl: string | undefined): void {
   window.open(addr)
 }
 
-// export const ImagePlaceholder = () => {
-//   const [images, setImages] = React.useState([])
-//   const maxNumber = 69
+const ImagePlaceholder = () => {
+  const [selectedImage, setSelectedImage] = useState<any | null>(null)
 
-//   const onChange = (imageList: any, addUpdateIndex: number[] | undefined) => {
-//     // data for submit
-//     console.log(imageList, addUpdateIndex)
-//     setImages(imageList as never[])
-//   }
-//   {
-//     return (
-//       <ImageUploader
-//         withIcon={false}
-//         withPreview={true}
-//         buttonText="Choose images"
-//         onChange={onChange}
-//         imgExtension={['.jpg', '.gif', '.png', '.gif']}
-//         maxFileSize={5242880}
-//       />
-//     )
-//   }
+  // This function will be triggered when the file field change
+  const imageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedImage(e.target.files[0])
+    }
+  }
 
-//   // const [images, setImages] = React.useState([])
-//   // const maxNumber = 69
+  // This function will be triggered when the "Remove This Image" button is clicked
+  const removeSelectedImage = (selectedImage: SetStateAction<undefined>) => {
+    setSelectedImage(selectedImage)
+  }
 
-//   // const onChange = (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
-//   //   // data for submit
-//   //   console.log(imageList, addUpdateIndex)
-//   //   setImages(imageList as never[])
-//   // }
+  return (
+    <>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingTop: 50,
+        }}
+      >
+        <input accept="image/*" type="file" onChange={imageChange} />
 
-//   // return (
-//   //   <div className="App" style={{ fontFamily: 'sans-serif', textAlign: 'center' }}>
-//   //     <ImageUploading multiple value={images} onChange={onChange} maxNumber={maxNumber}>
-//   //       {({ imageList, onImageUpload, onImageRemoveAll, onImageUpdate, onImageRemove, isDragging, dragProps }) => (
-//   //         // write your building UI
-//   //         <div className="upload__image-wrapper">
-//   //           <button style={isDragging ? { color: 'red' } : undefined} onClick={onImageUpload} {...dragProps}>
-//   //             Click or Drop here
-//   //           </button>
-//   //           &nbsp;
-//   //           <button onClick={onImageRemoveAll}>Remove all images</button>
-//   //           {imageList.map((image: { dataURL: string | undefined }, index: React.Key | null | undefined) => (
-//   //             <div key={index} className="image-item">
-//   //               <img src={image.dataURL} alt="" width="100" />
-//   //               <div className="image-item__btn-wrapper">
-//   //                 <button onClick={() => onImageUpdate(index)}>Update</button>
-//   //                 <button onClick={() => onImageRemove(index)}>Remove</button>
-//   //               </div>
-//   //             </div>
-//   //           ))}
-//   //         </div>
-//   //       )}
-//   //     </ImageUploading>
-//   //   </div>
-//   // )
-// }
+        {selectedImage && (
+          <div
+            style={{
+              marginTop: 50,
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <img src={URL.createObjectURL(selectedImage)} style={styles.image} alt="Thumb" />
+            <button onClick={() => removeSelectedImage(selectedImage)} style={styles.delete}>
+              Remove This Image
+            </button>
+          </div>
+        )}
+      </div>
+    </>
+  )
+}
+
+// Just some styles
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 50,
+  },
+  preview: {
+    marginTop: 50,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  image: { maxWidth: '100%', maxHeight: 320 },
+  delete: {
+    cursor: 'pointer',
+    padding: 15,
+    background: 'red',
+    color: 'white',
+    border: 'none',
+  },
+}
