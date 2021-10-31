@@ -1,7 +1,7 @@
 import { Link, RouteComponentProps } from 'react-router-dom'
 import './index.css'
 import asvg from '../../assets/images/big_unicorn.png'
-import { SetStateAction, useState } from 'react'
+import { ChangeEvent, SetStateAction, useState } from 'react'
 import {
   TabContent,
   TabPane,
@@ -259,7 +259,7 @@ export function CreatorProfile(
           {isWalletAddress && !isVaultGenerated && (
             <button onClick={() => handleGenerateVault()}>Generate Vault</button>
           )}
-          {isWalletAddress && isCreator && isVaultGenerated && <CreateNewwNFTModal />}
+          {isWalletAddress && isCreator && isVaultGenerated && <CreateNewNFTModal />}
           {isWalletAddress && isCreator && isVaultGenerated && <AddMintedNFTModal />}
           {isWalletAddress && isCreator && isVaultGenerated && !isICTOStarted && (
             <button>Initialize Liquidity Offering</button>
@@ -273,8 +273,16 @@ export function CreatorProfile(
     </div>
   )
 }
-
-const CreateNewwNFTModal = () => {
+// const _onChange = (e: React.KeyboardEvent) => {
+//   const name = this.props.data.Name;
+//   const value = (e.target as HTMLInputElement).value;
+//   this.props.onChange(name, value);
+// }
+const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const newValue = e.target.value
+  console.log(newValue)
+}
+const CreateNewNFTModal = () => {
   const [modal, setModal] = useState(false)
 
   const toggle = () => setModal(!modal)
@@ -285,11 +293,14 @@ const CreateNewwNFTModal = () => {
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Modal title</ModalHeader>
         <ModalBody>
-          <div>
-            <img src={asvg} />
-          </div>
-          <div>Name</div>
-          <div>Description</div>
+          {/* <div> */}
+          {/* <img src={asvg} /> */}
+          {/* <ImagePlaceholder /> */}
+          {/* </div> */}
+          <input type="tex" onChange={onChange} placeholder="Name" />
+          {/* <div>Name</div> */}
+          <input type="tex" onChange={onChange} placeholder="Description" />
+          {/* <div>Description</div> */}
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
@@ -315,8 +326,10 @@ const AddMintedNFTModal = () => {
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Modal title</ModalHeader>
         <ModalBody>
-          <div>NFT Contract</div>
-          <div>TokenId</div>
+          <input type="tex" onChange={onChange} placeholder="NFT Contract" />
+          <input type="tex" onChange={onChange} placeholder="TokenId" />
+          {/* <div>NFT Contract</div>
+          <div>TokenId</div> */}
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
@@ -342,8 +355,10 @@ const ICTOSubcriptionModal = () => {
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Modal title</ModalHeader>
         <ModalBody>
-          <div>Min Bid Price - 0.1 WETH</div>
-          <div>Deadline - 14 Days</div>
+          <input type="tex" onChange={onChange} placeholder="Min Bid Price" />
+          <input type="tex" onChange={onChange} placeholder="Deadline" />
+          {/* <div>Min Bid Price - 0.1 WETH</div>
+          <div>Deadline - 14 Days</div> */}
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
@@ -362,3 +377,61 @@ function handleCreatorAddressClick(creatorIdFromUrl: string | undefined): void {
   const addr = 'https://polygonscan.com/address/' + creatorIdFromUrl
   window.open(addr)
 }
+
+// export const ImagePlaceholder = () => {
+//   const [images, setImages] = React.useState([])
+//   const maxNumber = 69
+
+//   const onChange = (imageList: any, addUpdateIndex: number[] | undefined) => {
+//     // data for submit
+//     console.log(imageList, addUpdateIndex)
+//     setImages(imageList as never[])
+//   }
+//   {
+//     return (
+//       <ImageUploader
+//         withIcon={false}
+//         withPreview={true}
+//         buttonText="Choose images"
+//         onChange={onChange}
+//         imgExtension={['.jpg', '.gif', '.png', '.gif']}
+//         maxFileSize={5242880}
+//       />
+//     )
+//   }
+
+//   // const [images, setImages] = React.useState([])
+//   // const maxNumber = 69
+
+//   // const onChange = (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
+//   //   // data for submit
+//   //   console.log(imageList, addUpdateIndex)
+//   //   setImages(imageList as never[])
+//   // }
+
+//   // return (
+//   //   <div className="App" style={{ fontFamily: 'sans-serif', textAlign: 'center' }}>
+//   //     <ImageUploading multiple value={images} onChange={onChange} maxNumber={maxNumber}>
+//   //       {({ imageList, onImageUpload, onImageRemoveAll, onImageUpdate, onImageRemove, isDragging, dragProps }) => (
+//   //         // write your building UI
+//   //         <div className="upload__image-wrapper">
+//   //           <button style={isDragging ? { color: 'red' } : undefined} onClick={onImageUpload} {...dragProps}>
+//   //             Click or Drop here
+//   //           </button>
+//   //           &nbsp;
+//   //           <button onClick={onImageRemoveAll}>Remove all images</button>
+//   //           {imageList.map((image: { dataURL: string | undefined }, index: React.Key | null | undefined) => (
+//   //             <div key={index} className="image-item">
+//   //               <img src={image.dataURL} alt="" width="100" />
+//   //               <div className="image-item__btn-wrapper">
+//   //                 <button onClick={() => onImageUpdate(index)}>Update</button>
+//   //                 <button onClick={() => onImageRemove(index)}>Remove</button>
+//   //               </div>
+//   //             </div>
+//   //           ))}
+//   //         </div>
+//   //       )}
+//   //     </ImageUploading>
+//   //   </div>
+//   // )
+// }
