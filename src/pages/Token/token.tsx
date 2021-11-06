@@ -76,21 +76,40 @@ export const ProductTable = (props: { products: any; caption: string; nftURL: st
   const rowValue: any[] = Object.values(items)
 
   return (
-    <table>
+    <table
+      style={{
+        // maxWidth: 'max-content',
+        border: '2px solid black',
+      }}
+    >
       {/* <caption>{props.caption}</caption> */}
       <thead>
         <tr>
           {rowHeader.map((rowHeader: string) => (
             <th key={rowHeader}>
-              <button type="button" onClick={() => requestSort(rowHeader)} className={getClassNamesFor(rowHeader)}>
-                {rowHeader}
-              </button>
+              {' '}
+              <div
+                style={{
+                  justifyContent: 'center',
+                  display: 'flex',
+                }}
+              >
+                <button
+                  style={{
+                    background: 'transparent',
+                  }}
+                  type="button"
+                  onClick={() => requestSort(rowHeader)}
+                  className={getClassNamesFor(rowHeader)}
+                >
+                  {rowHeader}
+                </button>
+              </div>
             </th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {/* {items.map((item) => ( */}
         {rowValue.map((rowHeader: any) => (
           <tr key={rowHeader}>
             {Object.entries(rowHeader).map(([key, value]) => (
@@ -100,7 +119,6 @@ export const ProductTable = (props: { products: any; caption: string; nftURL: st
             ))}{' '}
           </tr>
         ))}
-        {/* ))} */}
       </tbody>
     </table>
   )
@@ -116,19 +134,21 @@ export function Td({ to, children, nftURL }: tdprops) {
   const defaultStyle = {
     textDecoration: 'auto',
     color: 'blue',
+    justifyContent: 'center',
+    display: 'flex',
+  }
+  const conditionalStyle = (): any => {
+    if (to == 'Total Value' || to == 'In Token' || to == 'Out Token') {
+      return {
+        defaultStyle,
+      }
+    }
+    return defaultStyle
   }
   const childrenCopy = children
   if (typeof children === 'string') {
     if (children.substring(0, 2) == '0x') {
       children = children.substring(0, 4) + '...' + children.substring(children.length - 4, children.length)
-    }
-    if (children.substring(0, 1) == '+') {
-      defaultStyle.color = 'green'
-      children += '%'
-    }
-    if (children.substring(0, 1) == '-') {
-      defaultStyle.color = 'red'
-      children += '%'
     }
   }
   const redirect = '/pair/0xdc9232e2df177d7a12fdff6ecbab114e2231198d'
@@ -144,9 +164,20 @@ export function Td({ to, children, nftURL }: tdprops) {
   }
 
   if (to == 'Total Value' || to == 'In Token' || to == 'Out Token') {
-    return <td>{children}</td>
+    return (
+      <td>
+        <div
+          style={{
+            justifyContent: 'center',
+            display: 'flex',
+          }}
+        >
+          {children}
+        </div>
+      </td>
+    )
   }
-
+  const abc: any = {}
   return (
     <td onClick={() => handleOnClick(link, to)}>
       <Link style={defaultStyle} to={redirect}>

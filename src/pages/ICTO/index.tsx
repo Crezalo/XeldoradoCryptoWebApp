@@ -26,7 +26,7 @@ const CTASection = styled.section`
   `};
 `
 
-const CTA1 = styled(ExternalLink)`
+const CTA1 = styled(Link)`
   background-color: ${({ theme }) => theme.bg2};
   background: radial-gradient(
       92.78% 103.09% at 50.06% 7.22%,
@@ -43,19 +43,8 @@ const CTA1 = styled(ExternalLink)`
   align-items: center;
   overflow: hidden;
   border: 1px solid transparent;
-
-  * {
-    color: ${({ theme }) => theme.text1};
-    text-decoration: none !important;
-  }
-
-  :hover {
-    border: 1px solid ${({ theme }) => theme.bg0};
-    text-decoration: none;
-    * {
-      text-decoration: none !important;
-    }
-  }
+  cursor: auto;
+  text-decoration: auto;
 
   :before {
     content: '';
@@ -68,43 +57,8 @@ const CTA1 = styled(ExternalLink)`
     opacity: 0.4;
     background: url(${Texture}) 0 0 repeat;
     transform: rotate(-4deg);
-  }
-`
-
-const CTA2 = styled(ExternalLink)`
-  position: relative;
-  overflow: hidden;
-  padding: 32px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border: 1px solid transparent;
-
-  * {
-    color: ${({ theme }) => theme.text1};
-    text-decoration: none !important;
-  }
-
-  // :hover {
-  //   border: 1px solid ${({ theme }) => theme.bg0};
-  //   text-decoration: none !important;
-  //   * {
-  //     text-decoration: none !important;
-  //   }
-  // }
-
-  :before {
-    content: '';
-    position: absolute;
-    width: 340%;
-    height: 280%;
-    top: -170%;
-    left: -134%;
-    opacity: 0.4;
-    z-index: -1;
-    background: url(${Texture}) 0 0 repeat;
-    transform: rotate(-4deg);
+    cursor: auto;
+    text-decoration: auto;
   }
 `
 
@@ -191,15 +145,35 @@ export const ProductTable = (props: { products: any; caption: string }) => {
   const rowValue: any[] = Object.values(items)
 
   return (
-    <table>
+    <table
+      style={{
+        maxWidth: 'fit-content',
+        marginTop: '50px',
+        border: '2px solid black',
+      }}
+    >
       {/* <caption>{props.caption}</caption> */}
       <thead>
         <tr>
           {rowHeader.map((rowHeader: string) => (
             <th key={rowHeader}>
-              <button type="button" onClick={() => requestSort(rowHeader)} className={getClassNamesFor(rowHeader)}>
-                {rowHeader}
-              </button>
+              <div
+                style={{
+                  justifyContent: 'center',
+                  display: 'flex',
+                }}
+              >
+                <button
+                  style={{
+                    background: 'transparent',
+                  }}
+                  type="button"
+                  onClick={() => requestSort(rowHeader)}
+                  className={getClassNamesFor(rowHeader)}
+                >
+                  {rowHeader}
+                </button>
+              </div>{' '}
             </th>
           ))}
         </tr>
@@ -231,15 +205,14 @@ export function Td(this: any, { to, children, rowValue }: tdprops) {
   const defaultStyle = {
     textDecoration: 'auto',
     color: 'blue',
+    justifyContent: 'center',
+    display: 'flex',
   }
   if (to == 'Bid Creator Token') {
     defaultStyle.color = 'green'
   }
   console.log('td: ' + rowValue)
   const sto = rowValue.Creator
-  // if (to == 'Min Bid Price') {
-  //   sto = children
-  // }
   console.log('sto ' + sto)
 
   const addr = '0xdc9232e2df177d7a12fdff6ecbab114e2231198d'
@@ -250,7 +223,6 @@ export function Td(this: any, { to, children, rowValue }: tdprops) {
     }
   }
   let redirect = '/icto'
-  // let link = '/pair/' + children
   if (to == 'Creator') {
     redirect = '/creator/' + children
   }
@@ -262,9 +234,11 @@ export function Td(this: any, { to, children, rowValue }: tdprops) {
     <td>
       {to == 'Bid Creator Token' ? (
         <>
-          <button onClick={toggle} style={defaultStyle}>
-            {children}
-          </button>
+          <div style={defaultStyle}>
+            <button onClick={toggle} style={{ color: 'black' }}>
+              {children}
+            </button>
+          </div>
           <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Modal title</ModalHeader>
             <ModalBody>
@@ -282,7 +256,7 @@ export function Td(this: any, { to, children, rowValue }: tdprops) {
           </Modal>
         </>
       ) : (
-        <Link style={defaultStyle} to={redirect}>
+        <Link style={to == 'Creator' ? defaultStyle : { ...defaultStyle, color: 'black' }} to={redirect}>
           {children}
         </Link>
       )}
@@ -292,7 +266,12 @@ export function Td(this: any, { to, children, rowValue }: tdprops) {
 export function ICTO() {
   return (
     <>
-      <CTA1 href={''}>
+      <CTA1
+        to={'/icto'}
+        style={{
+          background: 'whitesmoke',
+        }}
+      >
         <ResponsiveColumn>
           <HeaderText style={{ alignSelf: 'center' }}>
             <Trans>Buy Ongoing Creator Token Offering</Trans>

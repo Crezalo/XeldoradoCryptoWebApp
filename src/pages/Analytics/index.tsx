@@ -51,15 +51,35 @@ export const ProductTable = (props: { products: any; caption: string }) => {
   console.log(rowValue)
   Object.entries(rowValue[0]).map(([key, value]) => console.log('key: ' + key + ' value: ' + value))
   return (
-    <table>
+    <table
+      style={{
+        maxWidth: 'max-content',
+        border: '2px solid black',
+      }}
+    >
       {/* <caption>{props.caption}</caption> */}
       <thead>
         <tr>
           {rowHeader.map((rowHeader: string) => (
             <th key={rowHeader}>
-              <button type="button" onClick={() => requestSort(rowHeader)} className={getClassNamesFor(rowHeader)}>
-                {rowHeader}
-              </button>
+              {' '}
+              <div
+                style={{
+                  justifyContent: 'center',
+                  display: 'flex',
+                }}
+              >
+                <button
+                  style={{
+                    background: 'transparent',
+                  }}
+                  type="button"
+                  onClick={() => requestSort(rowHeader)}
+                  className={getClassNamesFor(rowHeader)}
+                >
+                  {rowHeader}
+                </button>{' '}
+              </div>{' '}
             </th>
           ))}
         </tr>
@@ -91,6 +111,8 @@ export function Td({ to, children }: tdprops) {
   const defaultStyle = {
     textDecoration: 'auto',
     color: 'black',
+    justifyContent: 'center',
+    display: 'flex',
   }
 
   if (typeof children === 'string') {

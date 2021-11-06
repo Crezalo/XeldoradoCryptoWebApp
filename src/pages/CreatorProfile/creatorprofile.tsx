@@ -61,15 +61,39 @@ export const ProductTable = (props: { products: any; caption: string; nftURL: st
   const rowValue: any[] = Object.values(items)
 
   return (
-    <table>
+    <table
+      style={{
+        // maxWidth: 'max-content',
+        border: '2px solid black',
+        width: '1320px',
+        // minWidth: '960px',
+        // width: '100%',
+        // boxSizing: 'border-box',
+      }}
+    >
       {/* <caption>{props.caption}</caption> */}
       <thead>
         <tr>
           {rowHeader.map((rowHeader: string) => (
             <th key={rowHeader}>
-              <button type="button" onClick={() => requestSort(rowHeader)} className={getClassNamesFor(rowHeader)}>
-                {rowHeader}
-              </button>
+              {' '}
+              <div
+                style={{
+                  justifyContent: 'center',
+                  display: 'flex',
+                }}
+              >
+                <button
+                  style={{
+                    background: 'transparent',
+                  }}
+                  type="button"
+                  onClick={() => requestSort(rowHeader)}
+                  className={getClassNamesFor(rowHeader)}
+                >
+                  {rowHeader}
+                </button>
+              </div>
             </th>
           ))}
         </tr>
@@ -99,6 +123,8 @@ export function Td({ to, children, nftURL }: tdprops) {
   const defaultStyle = {
     textDecoration: 'auto',
     color: 'blue',
+    justifyContent: 'center',
+    display: 'flex',
   }
 
   const addr = '0xdc9232e2df177d7a12fdff6ecbab114e2231198d'
@@ -212,7 +238,6 @@ export function CreatorProfile(
   function handleGenerateVault(): void {
     isVaultGenerated = true
     // TODO
-    throw new Error('Function not implemented.')
   }
   const linkStyle = {
     color: 'black',
@@ -254,12 +279,30 @@ export function CreatorProfile(
           {isWalletAddress && !isVaultGenerated && (
             <button onClick={() => handleGenerateVault()}>Generate Vault</button>
           )}
-          {isWalletAddress && isCreator && isVaultGenerated && <CreateNewNFTModal />}
-          {isWalletAddress && isCreator && isVaultGenerated && <AddMintedNFTModal />}
+          {isWalletAddress && isCreator && isVaultGenerated && (
+            <EmptyModal
+              modalBody={() => CreateNewNFTModalBody()}
+              modalTitle={'Create New NFT'}
+              modalFooterButtonText={'Create'}
+            />
+          )}
+          {isWalletAddress && isCreator && isVaultGenerated && (
+            <EmptyModal
+              modalBody={() => AddMintedNFTModalBody()}
+              modalTitle={'Add Minted NFT'}
+              modalFooterButtonText={'Add'}
+            />
+          )}
           {isWalletAddress && isCreator && isVaultGenerated && !isICTOStarted && (
             <button>Initialize Liquidity Offering</button>
           )}
-          {isCreator && isVaultGenerated && isICTOStarted && !isICTOComplete && <ICTOSubcriptionModal />}
+          {isCreator && isVaultGenerated && isICTOStarted && !isICTOComplete && (
+            <EmptyModal
+              modalBody={() => ICTOSubcriptionModalBody()}
+              modalTitle={'View ICTO Subscription'}
+              modalFooterButtonText={'Bid'}
+            />
+          )}
         </div>
       </div>
       <div></div>
@@ -268,100 +311,56 @@ export function CreatorProfile(
     </div>
   )
 }
-// const _onChange = (e: React.KeyboardEvent) => {
-//   const name = this.props.data.Name;
-//   const value = (e.target as HTMLInputElement).value;
-//   this.props.onChange(name, value);
-// }
 const onChange = (e: ChangeEvent<HTMLInputElement>) => {
   const newValue = e.target.value
   console.log(newValue)
 }
-const CreateNewNFTModal = () => {
-  const [modal, setModal] = useState(false)
 
-  const toggle = () => setModal(!modal)
+function CreateNewNFTModalBody() {
   return (
     <>
-      <button onClick={toggle}>Create New NFT</button>
-
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-        <ModalBody>
-          {/* <div> */}
-          {/* <img src={asvg} /> */}
-          <ImagePlaceholder />
-          {/* </div> */}
-          <input type="tex" onChange={onChange} placeholder="Name" />
-          {/* <div>Name</div> */}
-          <input type="tex" onChange={onChange} placeholder="Description" />
-          {/* <div>Description</div> */}
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Create
-          </Button>{' '}
-          {/* <Button color="secondary" onClick={toggle}>
-                Cancel
-              </Button> */}
-        </ModalFooter>
-      </Modal>
+      <ImagePlaceholder />
+      <input type="tex" onChange={onChange} placeholder="Name" />
+      <input type="tex" onChange={onChange} placeholder="Description" />
     </>
   )
 }
-
-const AddMintedNFTModal = () => {
-  const [modal, setModal] = useState(false)
-
-  const toggle = () => setModal(!modal)
+function AddMintedNFTModalBody() {
   return (
     <>
-      <button onClick={toggle}>Add Minted NFT</button>
-
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-        <ModalBody>
-          <input type="tex" onChange={onChange} placeholder="NFT Contract" />
-          <input type="tex" onChange={onChange} placeholder="TokenId" />
-          {/* <div>NFT Contract</div>
-          <div>TokenId</div> */}
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Add
-          </Button>{' '}
-          {/* <Button color="secondary" onClick={toggle}>
-                Cancel
-              </Button> */}
-        </ModalFooter>
-      </Modal>
+      <input type="tex" onChange={onChange} placeholder="NFT Contract" />
+      <input type="tex" onChange={onChange} placeholder="TokenId" />
     </>
   )
 }
-
-const ICTOSubcriptionModal = () => {
+function ICTOSubcriptionModalBody() {
+  return (
+    <>
+      <input type="tex" onChange={onChange} placeholder="Min Bid Price" />
+      <input type="tex" onChange={onChange} placeholder="Deadline" />
+    </>
+  )
+}
+interface props {
+  modalBody: () => JSX.Element
+  modalTitle: string
+  modalFooterButtonText: string
+}
+const EmptyModal = ({ modalBody, modalTitle, modalFooterButtonText }: props) => {
   const [modal, setModal] = useState(false)
 
   const toggle = () => setModal(!modal)
   return (
     <>
-      <button onClick={toggle}>View ICTO Subscription</button>
+      <button onClick={toggle}>{modalTitle}</button>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-        <ModalBody>
-          <input type="tex" onChange={onChange} placeholder="Min Bid Price" />
-          <input type="tex" onChange={onChange} placeholder="Deadline" />
-          {/* <div>Min Bid Price - 0.1 WETH</div>
-          <div>Deadline - 14 Days</div> */}
-        </ModalBody>
+        <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
+        <ModalBody>{modalBody()}</ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
-            Bid
-          </Button>{' '}
-          {/* <Button color="secondary" onClick={toggle}>
-                Cancel
-              </Button> */}
+            {modalFooterButtonText}
+          </Button>
         </ModalFooter>
       </Modal>
     </>
