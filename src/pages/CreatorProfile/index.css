@@ -9,6 +9,12 @@
   float: left;
   padding: 20px;
   /* border: 2px solid red; */
+
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  font-size: larger;
 }
 
 .tokenDetails {

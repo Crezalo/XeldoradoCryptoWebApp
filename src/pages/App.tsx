@@ -37,6 +37,7 @@ import { RedirectPathToTokenOnly } from './Token/redirects'
 import { Token } from './Token/token'
 import { NFT } from './NFT/nft'
 import { CreatorProfile } from './CreatorProfile/creatorprofile'
+import Creators from './Creators/creators'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -94,6 +95,7 @@ export default function App() {
             <TopLevelModals />
             <Switch>
               <Route exact strict path="/dashboard" component={Dashboard} />
+              <Route exact strict path="/creators" component={Creators} />
               <Route exact strict path="/icto" component={ICTO} />
               <Route exact strict path="/analytics" component={Analytics} />
               <Route exact strict path="/pair/:tokenId" component={Token} />

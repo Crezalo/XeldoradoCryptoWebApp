@@ -288,6 +288,9 @@ export default function Header() {
         <StyledNavLink to={'/analytics'}>
           <Trans>Analytics</Trans>
         </StyledNavLink>
+        <StyledNavLink to={'/creators'}>
+          <Trans>Creator</Trans>
+        </StyledNavLink>
         {/* <StyledNavLink
           id={`pool-nav-link`}
           to={'/dashboard'}

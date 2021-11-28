@@ -1,4 +1,4 @@
-import './dashboard.css'
+// import './dashboard.css'
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Container, Row, Col } from 'reactstrap'
 import { Info } from 'react-feather'
 import { Link, RouteComponentProps } from 'react-router-dom'
@@ -31,7 +31,6 @@ const defaultStyle = {
   color: 'black',
   justifyContent: 'center',
   display: 'flex',
-  fontFamily: 'sans-serif',
 }
 
 const CardComponent = (name: string) => {
@@ -57,7 +56,7 @@ const CardComponent = (name: string) => {
   )
 }
 
-export default function Dashboard() {
+export default function Creators() {
   const numberOfCards = 11
   const name = 'Xeldrorado-Nft'
   return (

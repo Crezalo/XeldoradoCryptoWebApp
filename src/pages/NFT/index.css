@@ -1,12 +1,35 @@
 .details {
   width: 50%;
-  float: left;
+  /* float: right; */
   padding: 20px;
+
+  font-size: larger;
   /* border: 2px solid red; */
 }
 .chart {
   width: 50%;
-  float: right;
+  /* height: 50%; */
+  float: left;
   padding: 20px;
+  text-align: right;
+
   /* border: 2px solid red; */
+}
+.cover {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.triad {
+  width: 30%;
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.block {
+  width: 5%;
+  float: left;
 }

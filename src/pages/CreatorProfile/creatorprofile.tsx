@@ -17,6 +17,7 @@ import {
 import classnames from 'classnames'
 import Dashboard from 'pages/Dashboard'
 import React from 'react'
+import { ButtonGray } from 'components/Button'
 
 const useSortableData = (items: any, _config = null) => {
   const [sortConfig, setSortConfig] = React.useState<any | null>(null)
@@ -259,11 +260,11 @@ export function CreatorProfile(
 
   return (
     <div>
-      <button>{creatorIdFromUrl}</button>
+      {/* <ButtonGray>{creatorIdFromUrl}</ButtonGray> */}
 
       <div>
         <div className="image">
-          <img src={asvg} width="200" height="200" style={{ borderRadius: '200px' }}></img>
+          <img src={asvg} width="200" height="200" style={{ borderRadius: '200px', float: 'right' }}></img>
         </div>
 
         <div className="description">
@@ -275,9 +276,9 @@ export function CreatorProfile(
         </div>
 
         <div className="tokenDetails">
-          {isWalletAddress && !isCreator && <button>Become Creator</button>}
+          {isWalletAddress && !isCreator && <ButtonGray>Become Creator</ButtonGray>}
           {isWalletAddress && !isVaultGenerated && (
-            <button onClick={() => handleGenerateVault()}>Generate Vault</button>
+            <ButtonGray onClick={() => handleGenerateVault()}>Generate Vault</ButtonGray>
           )}
           {isWalletAddress && isCreator && isVaultGenerated && (
             <EmptyModal
@@ -294,7 +295,7 @@ export function CreatorProfile(
             />
           )}
           {isWalletAddress && isCreator && isVaultGenerated && !isICTOStarted && (
-            <button>Initialize Liquidity Offering</button>
+            <ButtonGray>Initialize Liquidity Offering</ButtonGray>
           )}
           {isCreator && isVaultGenerated && isICTOStarted && !isICTOComplete && (
             <EmptyModal
@@ -352,7 +353,7 @@ const EmptyModal = ({ modalBody, modalTitle, modalFooterButtonText }: props) => 
   const toggle = () => setModal(!modal)
   return (
     <>
-      <button onClick={toggle}>{modalTitle}</button>
+      <ButtonGray onClick={toggle}>{modalTitle}</ButtonGray>
 
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>

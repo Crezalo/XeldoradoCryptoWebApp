@@ -3,7 +3,20 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import './index.css'
 // import { ProductTable } from 'pages/Analytics'
 
-import asvg from '../../assets/images/big_unicorn.png'
+import asvg from '../../assets/images/abc.png'
+import {
+  ButtonLight,
+  ButtonPrimary,
+  ButtonSecondary,
+  ButtonGray,
+  ButtonOutlined,
+  ButtonYellow,
+  ButtonText,
+  ButtonEmpty,
+  // ButtonErrorStyle,
+  // ButtonConfirmedStyle,
+} from 'components/Button'
+// import asvg from '../../assets/images/big_unicorn.png'
 
 const useSortableData = (items: any, _config = null) => {
   const [sortConfig, setSortConfig] = React.useState<any | null>(null)
@@ -48,15 +61,37 @@ export const ProductTable = (props: { products: any; caption: string; nftURL: an
   const rowValue: any[] = Object.values(items)
 
   return (
-    <table>
+    <table
+      style={{
+        maxWidth: '-webkit-fill-available',
+        marginTop: '50px',
+        marginLeft: '500px',
+        marginRight: '500px',
+        border: '2px solid black',
+      }}
+    >
       {/* <caption>{props.caption}</caption> */}
       <thead>
         <tr>
           {rowHeader.map((rowHeader: string) => (
             <th key={rowHeader}>
-              <button type="button" onClick={() => requestSort(rowHeader)} className={getClassNamesFor(rowHeader)}>
-                {rowHeader}
-              </button>
+              <div
+                style={{
+                  justifyContent: 'center',
+                  display: 'flex',
+                }}
+              >
+                <button
+                  style={{
+                    background: 'transparent',
+                  }}
+                  type="button"
+                  onClick={() => requestSort(rowHeader)}
+                  className={getClassNamesFor(rowHeader)}
+                >
+                  {rowHeader}
+                </button>
+              </div>
             </th>
           ))}
         </tr>
@@ -88,6 +123,9 @@ export function Td({ to, children, nftURL }: tdprops) {
   const defaultStyle = {
     textDecoration: 'auto',
     color: 'blue',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 
   const addr = '0xdc9232e2df177d7a12fdff6ecbab114e2231198d'
@@ -140,26 +178,42 @@ export function NFT({
   },
 }: RouteComponentProps<{ nftContractAddr?: string; tokenId?: string; creatorAddr?: string }>) {
   // console.log()
-
-  const isOwner = true
-  const hasOwner = true
+  const isOwner = false
+  const hasOwner = false
   const addr = '0x14dC79964da2C08b23698B3D3cc7Ca32193d9955'
   const ownerAddress = !isOwner ? addr : 'You'
-  // api
-
   return (
     <div>
-      <button>{nftContractAddrUrl}</button>
-      <button>{tokenIdUrl}</button>
-      <button>{creatorAddrUrl}</button>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      {/* <ButtonPrimary>{nftContractAddrUrl}</ButtonPrimary>
+      <ButtonLight>{tokenIdUrl}</ButtonLight>
+      <ButtonOutlined>{creatorAddrUrl}</ButtonOutlined> */}
+      <div
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '50px', marginTop: '0px' }}
+      >
+        <div className="chart">
+          {/* <div className="blue"> */}
+          <img className="cover" src={asvg}></img>
+        </div>
+
         <div className="details">
           {/* <div className="green"> */}
-          <div>Collection Name</div>
-          <div>Name - Flying Horse</div>
-          <div>Token Id - #{tokenIdUrl}</div>
-          <div>Price - 200 CT1</div>
+          <div
+            style={
+              {
+                // fontSize: 'larger',
+              }
+            }
+          >
+            Collection Name
+          </div>
           <div>
+            <div className="triad">Name - Flying Horse</div>
+            <div className="block">|</div>
+            <div className="triad">Token Id - #{tokenIdUrl}</div>
+            <div className="block">|</div>
+            <div className="triad">Price - 200 CT1</div>
+          </div>
+          <div style={{ paddingRight: '50px' }}>
             Description - Drop 2 of Semiosis is 10 animated pieces, created to reflect the movement all around us.
             Signs, symbols and signals are everywhere around us in the built environment. They show us the way, warn us,
             excite us. But on their own they have no meaning. We all learn a shared visual language, devoid of words, to
@@ -167,21 +221,24 @@ export function NFT({
             different colours.
           </div>
           <div>Created By - 0x14dC79964da2C08b23698B3D3cc7Ca32193d9955</div>
+          <div>Contract Address - {nftContractAddrUrl}</div>
           <div>Owned By - {ownerAddress}</div>
 
-          {/* <div>Properties</div> */}
-          <div>Contract Address - {nftContractAddrUrl}</div>
-          <div>Token Standard - ERC-721</div>
-
           <div>Blockchain - Polygon</div>
-          {isOwner && hasOwner && <button>Return NFT</button>}
-          {!(isOwner || hasOwner) && <button>Redeem NFT</button>}
+          {/* <div className="block" style={{ float: 'right' }}>
+            |
+          </div> */}
+
+          <div>Token Standard - ERC-721</div>
+          <div>
+            {/* <div className="block">|</div> */}
+            {isOwner && hasOwner && <ButtonPrimary>Return NFT</ButtonPrimary>}
+            {!(isOwner || hasOwner) && (
+              <ButtonPrimary style={{ width: 'auto', height: 'auto', float: 'left' }}>Redeem NFT</ButtonPrimary>
+            )}
+          </div>
         </div>
-        <div className="chart">
-          {/* <div className="blue"> */}
-          <img src={asvg} width="300" height="300"></img>
-        </div>
-      </div>{' '}
+      </div>
       <ProductTable
         nftURL={[nftContractAddrUrl, tokenIdUrl, creatorAddrUrl]}
         caption={'Pools'}
