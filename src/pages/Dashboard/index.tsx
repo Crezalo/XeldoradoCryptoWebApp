@@ -61,7 +61,6 @@ export default function Dashboard() {
   const numberOfCards = 11
   const name = 'Xeldrorado-Nft'
   return (
-    // <div className="App">
     <Container>
       <Row xs={3}>
         {[...Array(numberOfCards)].map((e, i) => {
@@ -74,6 +73,5 @@ export default function Dashboard() {
         })}
       </Row>
     </Container>
-    // </div>
   )
 }

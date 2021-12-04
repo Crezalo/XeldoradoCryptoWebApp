@@ -5,12 +5,12 @@ import { useAppDispatch } from 'state/hooks'
 import { ApplicationModal, setOpenModal } from '../../state/application/actions'
 
 // Redirects to swap but only replace the pathname
-export function RedirectPathToTokenOnly({ location }: RouteComponentProps) {
-  return <Redirect to={{ ...location, pathname: '/pair/:tokenId' }} />
+export function RedirectPathToPairOnly({ location }: RouteComponentProps) {
+  return <Redirect to={{ ...location, pathname: '/pair/:pairId' }} />
 }
 
 // Redirects from the /swap/:outputCurrency path to the /swap?outputCurrency=:outputCurrency format
-export function RedirectToToken(props: RouteComponentProps<{ outputCurrency: string }>) {
+export function RedirectToPair(props: RouteComponentProps<{ outputCurrency: string }>) {
   const {
     location: { search },
     match: {
@@ -32,10 +32,10 @@ export function RedirectToToken(props: RouteComponentProps<{ outputCurrency: str
   )
 }
 
-export function OpenClaimAddressModalAndRedirectToToken(props: RouteComponentProps) {
+export function OpenClaimAddressModalAndRedirectToPair(props: RouteComponentProps) {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(setOpenModal(ApplicationModal.ADDRESS_CLAIM))
   }, [dispatch])
-  return <RedirectPathToTokenOnly {...props} />
+  return <RedirectPathToPairOnly {...props} />
 }

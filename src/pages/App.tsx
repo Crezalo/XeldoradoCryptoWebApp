@@ -33,8 +33,7 @@ import VotePage from './Vote/VotePage'
 import Analytics from './Analytics'
 import Dashboard from './Dashboard'
 import { ICTO } from './ICTO'
-import { RedirectPathToTokenOnly } from './Token/redirects'
-import { Token } from './Token/token'
+import { Pair } from './Pair/pair'
 import { NFT } from './NFT/nft'
 import { CreatorProfile } from './CreatorProfile/creatorprofile'
 import Creators from './Creators/creators'
@@ -98,7 +97,7 @@ export default function App() {
               <Route exact strict path="/creators" component={Creators} />
               <Route exact strict path="/icto" component={ICTO} />
               <Route exact strict path="/analytics" component={Analytics} />
-              <Route exact strict path="/pair/:tokenId" component={Token} />
+              <Route exact strict path="/pair/:pairId" component={Pair} />
               <Route exact strict path="/nft/:nftContractAddr/:tokenId/:creatorAddr" component={NFT} />
               <Route exact strict path="/creator/:creatorId" component={CreatorProfile} />
 

@@ -3,7 +3,7 @@
   /* float: right; */
   padding: 20px;
 
-  font-size: larger;
+  /* font-size: larger; */
   /* border: 2px solid red; */
 }
 .chart {
@@ -25,11 +25,9 @@
 .triad {
   width: 30%;
   float: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  justify-content: center;
 }
 .block {
-  width: 5%;
+  /* width: 5%; */
   float: left;
 }
