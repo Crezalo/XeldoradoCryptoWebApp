@@ -20,7 +20,7 @@ const Row = styled(Box)<{
 `
 
 export const RowBetween = styled(Row)`
-  justify-content: space-between;
+  justify-content: center;
 `
 
 export const RowFlat = styled.div`

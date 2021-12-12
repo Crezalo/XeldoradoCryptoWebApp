@@ -1,8 +1,9 @@
-//import Modal from 'components/Modal'
+import { ButtonSecondary } from 'components/Button'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import { Button } from 'rebass'
+import { HeaderText } from './index'
+import { TYPE } from 'theme'
 
 const useSortableData = (items: any, _config = null) => {
   const [sortConfig, setSortConfig] = React.useState<any | null>(null)
@@ -46,12 +47,16 @@ export const Table = (props: { products: any; caption: string }) => {
   const rowHeader: any[] = Object.keys(items[0])
   const rowValue: any[] = Object.values(items)
 
+  // const [modal, setModal] = useState(false)
+
+  // const toggle = () => setModal(!modal)
+
   return (
     <table
       style={{
-        maxWidth: 'fit-content',
-        marginTop: '50px',
-        border: '2px solid black',
+        maxWidth: 'max-content',
+        // marginTop: '50px',
+        // border: '1px solid ${({ theme }) => theme.primary4}',
       }}
     >
       {/* <caption>{props.caption}</caption> */}
@@ -59,10 +64,12 @@ export const Table = (props: { products: any; caption: string }) => {
         <tr>
           {rowHeader.map((rowHeader: string) => (
             <th key={rowHeader}>
-              <div
+              <HeaderText
                 style={{
                   justifyContent: 'center',
                   display: 'flex',
+                  paddingLeft: '20px',
+                  paddingRight: '20px',
                 }}
               >
                 <button
@@ -75,15 +82,23 @@ export const Table = (props: { products: any; caption: string }) => {
                 >
                   {rowHeader}
                 </button>
-              </div>{' '}
+              </HeaderText>
             </th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {/* {items.map((item) => ( */}
-        {rowValue.map((rowHeader: any) => (
-          <tr key={rowHeader}>
+        {rowValue.map((rowHeader: any, index) => (
+          <tr
+            style={
+              index % 2
+                ? {}
+                : {
+                    // background: '#e9ecef'
+                  }
+            }
+            key={rowHeader}
+          >
             {Object.entries(rowHeader).map(([key, value]) => (
               <Td key={key} to={key} rowValue={rowHeader}>
                 {value}
@@ -102,8 +117,6 @@ type tdprops = {
   rowValue: any
 }
 export function Td(this: any, { to, children, rowValue }: tdprops) {
-  // Conditionally wrapping content into a link
-  // const ContentTag = to ? Link : 'div';
   const defaultStyle = {
     textDecoration: 'auto',
     color: 'blue',
@@ -137,9 +150,9 @@ export function Td(this: any, { to, children, rowValue }: tdprops) {
       {to == 'Bid Creator Token' ? (
         <>
           <div style={defaultStyle}>
-            <button onClick={toggle} style={{ color: 'black' }}>
+            <ButtonSecondary onClick={toggle} style={{ color: 'black' }}>
               {children}
-            </button>
+            </ButtonSecondary>
           </div>
           <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Modal title</ModalHeader>
@@ -148,19 +161,21 @@ export function Td(this: any, { to, children, rowValue }: tdprops) {
               <div>Deadline - {rowValue['Time Remaining']}</div>
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={toggle}>
+              <ButtonSecondary color="primary" onClick={toggle}>
                 Bid
-              </Button>{' '}
+              </ButtonSecondary>{' '}
               {/* <Button color="secondary" onClick={toggle}>
-                  Cancel
-                </Button> */}
+              Cancel
+            </Button> */}
             </ModalFooter>
           </Modal>
         </>
       ) : (
-        <Link style={to == 'Creator' ? defaultStyle : { ...defaultStyle, color: 'black' }} to={redirect}>
-          {children}
-        </Link>
+        <TYPE.darkGray>
+          <Link style={to == 'Creator' ? defaultStyle : { ...defaultStyle, color: 'black' }} to={redirect}>
+            {children}
+          </Link>
+        </TYPE.darkGray>
       )}
     </td>
   )

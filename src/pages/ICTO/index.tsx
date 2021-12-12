@@ -7,7 +7,7 @@ import { BaseButton } from '../../components/Button'
 import { Link } from 'react-router-dom'
 import { Table } from './table'
 
-const CTASection = styled.section`
+export const CTASection = styled.section`
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 8px;
@@ -19,7 +19,7 @@ const CTASection = styled.section`
   `};
 `
 
-const CTA1 = styled(Link)`
+export const CTA1 = styled(Link)`
   background-color: ${({ theme }) => theme.bg2};
   background: radial-gradient(
       92.78% 103.09% at 50.06% 7.22%,
@@ -55,7 +55,7 @@ const CTA1 = styled(Link)`
   }
 `
 
-const HeaderText = styled(TYPE.label)`
+export const HeaderText = styled(TYPE.label)`
   align-items: center;
   display: flex;
   margin-bottom: 24px;
@@ -113,7 +113,14 @@ export function ICTO() {
           </TYPE.body>
         </ResponsiveColumn>
       </CTA1>
-      <CTA1 to={'/icto'}>
+      <div style={{ marginTop: '10px' }}></div>
+      <CTA1
+        to={'/icto'}
+        style={{
+          background: 'whitesmoke',
+        }}
+      >
+        {/* <ResponsiveColumn> */}
         <Table
           caption={'Pools'}
           products={[
@@ -155,6 +162,7 @@ export function ICTO() {
             },
           ]}
         />
+        {/* </ResponsiveColumn> */}
       </CTA1>
     </>
   )

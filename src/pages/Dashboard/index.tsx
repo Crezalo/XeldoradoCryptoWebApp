@@ -5,6 +5,8 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import asvg from '../../assets/images/abc.png'
+import { TYPE } from 'theme'
+import { Trans } from '@lingui/macro'
 
 const StyledInfo = styled(Info)`
   height: 16px;
@@ -42,7 +44,9 @@ const CardComponent = (name: string) => {
         <CardImg top width="100%" src={asvg} alt="Card image cap" />
         <CardBody>
           <CardTitle style={defaultStyle} tag="h5">
-            {name}
+            <TYPE.black>
+              <Trans>{name}</Trans>
+            </TYPE.black>
           </CardTitle>
           <CardSubtitle style={defaultStyle} tag="h6" className="mb-2 text-muted">
             Price

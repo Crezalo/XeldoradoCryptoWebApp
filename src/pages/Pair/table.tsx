@@ -1,5 +1,7 @@
+import { HeaderText } from 'pages/ICTO'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { TYPE } from 'theme'
 import './index.css'
 
 const useSortableData = (items: any, _config = null) => {
@@ -47,8 +49,8 @@ export const Table = (props: { products: any; caption: string; nftURL: string | 
   return (
     <table
       style={{
-        // maxWidth: 'max-content',
-        border: '2px solid black',
+        maxWidth: 'max-content',
+        // border: '2px solid black',
       }}
     >
       {/* <caption>{props.caption}</caption> */}
@@ -57,10 +59,12 @@ export const Table = (props: { products: any; caption: string; nftURL: string | 
           {rowHeader.map((rowHeader: string) => (
             <th key={rowHeader}>
               {' '}
-              <div
+              <HeaderText
                 style={{
                   justifyContent: 'center',
                   display: 'flex',
+                  paddingLeft: '30px',
+                  paddingRight: '30px',
                 }}
               >
                 <button
@@ -73,7 +77,7 @@ export const Table = (props: { products: any; caption: string; nftURL: string | 
                 >
                   {rowHeader}
                 </button>
-              </div>
+              </HeaderText>
             </th>
           ))}
         </tr>
@@ -98,21 +102,23 @@ type tdprops = {
   nftURL: string | undefined
 }
 export function Td({ to, children, nftURL }: tdprops) {
-  // Conditionally wrapping content into a link
-  // const ContentTag = to ? Link : 'div';
-  const defaultStyle = {
-    textDecoration: 'auto',
-    color: 'blue',
-    justifyContent: 'center',
-    display: 'flex',
-  }
   const conditionalStyle = (): any => {
     if (to == 'Total Value' || to == 'In Token' || to == 'Out Token') {
       return {
-        defaultStyle,
+        textDecoration: 'auto',
+        color: 'black',
+        justifyContent: 'center',
+        display: 'flex',
+        fontWeight: '500',
       }
     }
-    return defaultStyle
+    return {
+      fontWeight: '500',
+      textDecoration: 'auto',
+      color: 'blue',
+      justifyContent: 'center',
+      display: 'flex',
+    }
   }
   const childrenCopy = children
   if (typeof children === 'string') {
@@ -121,9 +127,7 @@ export function Td({ to, children, nftURL }: tdprops) {
     }
   }
   const redirect = '/pair/0xdc9232e2df177d7a12fdff6ecbab114e2231198d'
-  // if (nftURL) {
-  //   redirect += nftURL
-  // }
+
   let link = '/pair/' + children
   if (to == 'Account') {
     link = 'https://polygonscan.com/address/' + childrenCopy
@@ -135,23 +139,17 @@ export function Td({ to, children, nftURL }: tdprops) {
   if (to == 'Total Value' || to == 'In Token' || to == 'Out Token') {
     return (
       <td>
-        <div
-          style={{
-            justifyContent: 'center',
-            display: 'flex',
-          }}
-        >
-          {children}
-        </div>
+        <div style={conditionalStyle()}>{children}</div>
       </td>
     )
   }
-  const abc: any = {}
   return (
     <td onClick={() => handleOnClick(link, to)}>
-      <Link style={defaultStyle} to={redirect}>
-        {children}
-      </Link>
+      <TYPE.darkGray>
+        <Link style={conditionalStyle()} to={redirect}>
+          {children}
+        </Link>
+      </TYPE.darkGray>
     </td>
   )
 }

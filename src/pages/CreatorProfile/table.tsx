@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import './index.css'
 import React from 'react'
+import { TYPE } from 'theme'
+import { HeaderText } from 'pages/ICTO'
 
 const useSortableData = (items: any, _config = null) => {
   const [sortConfig, setSortConfig] = React.useState<any | null>(null)
@@ -47,9 +49,9 @@ export const Table = (props: { products: any; caption: string; nftURL: string | 
   return (
     <table
       style={{
-        // maxWidth: 'max-content',
-        border: '2px solid black',
-        width: '1320px',
+        maxWidth: 'max-content',
+        // border: '2px solid black',
+        // width: '1320px',
         // minWidth: '960px',
         // width: '100%',
         // boxSizing: 'border-box',
@@ -60,11 +62,12 @@ export const Table = (props: { products: any; caption: string; nftURL: string | 
         <tr>
           {rowHeader.map((rowHeader: string) => (
             <th key={rowHeader}>
-              {' '}
-              <div
+              <HeaderText
                 style={{
                   justifyContent: 'center',
                   display: 'flex',
+                  paddingLeft: '60px',
+                  paddingRight: '60px',
                 }}
               >
                 <button
@@ -77,7 +80,7 @@ export const Table = (props: { products: any; caption: string; nftURL: string | 
                 >
                   {rowHeader}
                 </button>
-              </div>
+              </HeaderText>
             </th>
           ))}
         </tr>
@@ -106,7 +109,7 @@ type tdprops = {
 export function Td({ to, children, nftURL }: tdprops) {
   const defaultStyle = {
     textDecoration: 'auto',
-    color: 'blue',
+    color: 'black',
     justifyContent: 'center',
     display: 'flex',
   }
@@ -117,9 +120,11 @@ export function Td({ to, children, nftURL }: tdprops) {
 
   return (
     <td>
-      <Link style={defaultStyle} to={redirect}>
-        {children}
-      </Link>
+      <TYPE.darkGray>
+        <Link style={defaultStyle} to={redirect}>
+          {children}
+        </Link>
+      </TYPE.darkGray>
     </td>
   )
 }

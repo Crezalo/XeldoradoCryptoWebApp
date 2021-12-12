@@ -1,5 +1,7 @@
+import { CTA1, HeaderText } from 'pages/ICTO'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { TYPE } from 'theme'
 import './index.css'
 
 export const Table = (props: { products: any; caption: string }) => {
@@ -60,9 +62,11 @@ export const Table = (props: { products: any; caption: string }) => {
     }
     return (
       <td>
-        <Link style={defaultStyle} to={to}>
-          {children}
-        </Link>
+        <TYPE.darkGray>
+          <Link style={defaultStyle} to={to}>
+            {children}
+          </Link>
+        </TYPE.darkGray>
       </td>
     )
   }
@@ -85,7 +89,7 @@ export const Table = (props: { products: any; caption: string }) => {
     <table
       style={{
         maxWidth: 'max-content',
-        border: '2px solid black',
+        // border: '2px solid black',
       }}
     >
       {/* <caption>{props.caption}</caption> */}
@@ -94,10 +98,13 @@ export const Table = (props: { products: any; caption: string }) => {
           {rowHeader.map((rowHeader: string) => (
             <th key={rowHeader}>
               {' '}
-              <div
+              <HeaderText
                 style={{
                   justifyContent: 'center',
                   display: 'flex',
+
+                  paddingLeft: '30px',
+                  paddingRight: '30px',
                 }}
               >
                 <button
@@ -110,7 +117,7 @@ export const Table = (props: { products: any; caption: string }) => {
                 >
                   {rowHeader}
                 </button>{' '}
-              </div>{' '}
+              </HeaderText>{' '}
             </th>
           ))}
         </tr>
@@ -135,91 +142,98 @@ export const Table = (props: { products: any; caption: string }) => {
 export default function Analytics() {
   return (
     <div className="App">
-      <Table
-        caption={'Products'}
-        products={[
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-          {
-            Pair: 'CT1/WETH',
-            'Volume 24H': 500000,
-            '24H%': '+4.9',
-            '7D%': '-20',
-            Owners: 5100,
-            'Total Supply': 1111888,
-          },
-        ]}
-      />
+      <CTA1
+        to={'/analytics'}
+        style={{
+          background: 'whitesmoke',
+        }}
+      >
+        <Table
+          caption={'Products'}
+          products={[
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+            {
+              Pair: 'CT1/WETH',
+              'Volume 24H': 500000,
+              '24H%': '+4.9',
+              '7D%': '-20',
+              Owners: 5100,
+              'Total Supply': 1111888,
+            },
+          ]}
+        />
+      </CTA1>
     </div>
   )
 }

@@ -37,20 +37,21 @@ export function CreatorProfile(
 
   return (
     <>
-      <div className="image">
-        <img src={asvg} width="200" height="200" style={{ borderRadius: '200px', float: 'right' }}></img>
-      </div>
-
-      <div className="description">
-        <div style={linkStyle} onClick={() => handleCreatorAddressClick(creatorIdFromUrl)}>
-          {displyCreatorAddr}
+      <div style={{ width: '100%' }}>
+        <div className="image">
+          <img src={asvg} width="200" height="200" style={{ borderRadius: '200px', float: 'right' }}></img>
         </div>
-        <div>Creator Token</div>
-        <div>100 WETH</div>
+
+        <div className="description">
+          <div style={linkStyle} onClick={() => handleCreatorAddressClick(creatorIdFromUrl)}>
+            {displyCreatorAddr}
+          </div>
+          <div>Creator Token</div>
+          <div>100 WETH</div>
+        </div>
+
+        <div className="tokenDetails">{<TokenDetails isCreator={isCreator} isVaultGenerated={isVaultGenerated} />}</div>
       </div>
-
-      <div className="tokenDetails">{<TokenDetails isCreator={isCreator} isVaultGenerated={isVaultGenerated} />}</div>
-
       <Tabs creatorIdFromUrl={creatorIdFromUrl ?? ''} isCreator={isCreator} isVaultGenerated={isVaultGenerated} />
     </>
   )
