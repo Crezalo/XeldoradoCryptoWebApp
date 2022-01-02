@@ -276,21 +276,21 @@ export default function Header() {
         {/* </UniIcon> */}
       </Title>
       <HeaderLinks>
-        <StyledNavLink to={'/trade'}>
-          <Trans>Trade</Trans>
-        </StyledNavLink>
         <StyledNavLink to={'/dashboard'}>
           <Trans>Dashboard</Trans>
         </StyledNavLink>
+        <StyledNavLink to={'/trade'}>
+          <Trans>Convert</Trans>
+        </StyledNavLink>
         <StyledNavLink to={'/icto'}>
-          <Trans>ICTO</Trans>
+          <Trans>New Creator</Trans>
         </StyledNavLink>
         <StyledNavLink to={'/analytics'}>
           <Trans>Analytics</Trans>
         </StyledNavLink>
-        <StyledNavLink to={'/creators'}>
+        {/* <StyledNavLink to={'/creators'}>
           <Trans>Creator</Trans>
-        </StyledNavLink>
+        </StyledNavLink> */}
         {/* <StyledNavLink
           id={`pool-nav-link`}
           to={'/dashboard'}

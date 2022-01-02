@@ -106,7 +106,7 @@ export function ICTO() {
       >
         <ResponsiveColumn>
           <HeaderText style={{ alignSelf: 'center' }}>
-            <Trans>Buy Ongoing Creator Token Offering</Trans>
+            <Trans>Buy Tokens of New Creator</Trans>
           </HeaderText>
           <TYPE.body fontWeight={300} style={{ alignSelf: 'center', justifyContent: 'center', display: 'flex' }}>
             <Trans>Bid best prices to buy in ICTOs</Trans>
